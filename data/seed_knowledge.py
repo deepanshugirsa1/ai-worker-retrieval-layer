@@ -10,36 +10,143 @@ sys.path.insert(0, str(ROOT))
 from src.index import rebuild_index
 from src.lake import connect, init_schema
 
-DOCS = [
+ACCOUNTS = [
     {
-        "doc_id": "doc-acme-001",
         "account_id": "acc_acme",
-        "title": "Acme account overview",
-        "body": "Acme is a SaaS lead with 120 employees. Primary contact alex@acme.io. Interested in AI SDR outreach.",
-        "source": "crm_enrichment",
+        "name": "Acme",
+        "industry": "SaaS",
+        "employees": 120,
+        "priority": "growth",
+        "stage": "lead",
+        "need": "AI SDR outreach",
+        "activity": "opened the pricing page twice this week",
     },
     {
-        "doc_id": "doc-acme-002",
-        "account_id": "acc_acme",
-        "title": "Acme recent activity",
-        "body": "Opened pricing page twice this week. HubSpot lifecycle stage is lead. Salesforce status Open.",
-        "source": "product_events",
-    },
-    {
-        "doc_id": "doc-globex-001",
         "account_id": "acc_globex",
-        "title": "Globex firmographics",
-        "body": "Globex manufacturing company ~5000 employees. Contact jordan@globex.com. Priority enterprise account.",
-        "source": "crm_enrichment",
+        "name": "Globex",
+        "industry": "manufacturing",
+        "employees": 5000,
+        "priority": "enterprise",
+        "stage": "opportunity",
+        "need": "supply-chain forecasting",
+        "activity": "requested a security review",
     },
     {
-        "doc_id": "doc-initech-001",
         "account_id": "acc_initech",
-        "title": "Initech opportunity notes",
-        "body": "Initech enterprise software. Contact sam@initech.com. Deal stage opportunity. Needs retrieval-backed AI worker follow-up.",
-        "source": "crm",
+        "name": "Initech",
+        "industry": "enterprise software",
+        "employees": 850,
+        "priority": "strategic",
+        "stage": "opportunity",
+        "need": "retrieval-backed AI worker follow-up",
+        "activity": "completed a technical discovery call",
+    },
+    {
+        "account_id": "acc_umbrella",
+        "name": "Umbrella",
+        "industry": "biotechnology",
+        "employees": 2300,
+        "priority": "enterprise",
+        "stage": "evaluation",
+        "need": "governed research-document search",
+        "activity": "downloaded the compliance whitepaper",
+    },
+    {
+        "account_id": "acc_hooli",
+        "name": "Hooli",
+        "industry": "consumer technology",
+        "employees": 12000,
+        "priority": "strategic",
+        "stage": "negotiation",
+        "need": "customer-support summarization",
+        "activity": "ran a product pilot with twenty users",
+    },
+    {
+        "account_id": "acc_stark",
+        "name": "Stark Industries",
+        "industry": "aerospace",
+        "employees": 18000,
+        "priority": "enterprise",
+        "stage": "discovery",
+        "need": "engineering knowledge retrieval",
+        "activity": "requested architecture documentation",
+    },
+    {
+        "account_id": "acc_wayne",
+        "name": "Wayne Enterprises",
+        "industry": "industrial conglomerate",
+        "employees": 42000,
+        "priority": "strategic",
+        "stage": "evaluation",
+        "need": "risk-analysis automation",
+        "activity": "scheduled an executive workshop",
+    },
+    {
+        "account_id": "acc_wonka",
+        "name": "Wonka Industries",
+        "industry": "consumer goods",
+        "employees": 640,
+        "priority": "growth",
+        "stage": "lead",
+        "need": "quality-incident classification",
+        "activity": "viewed the API documentation",
+    },
+    {
+        "account_id": "acc_tyrell",
+        "name": "Tyrell Corporation",
+        "industry": "robotics",
+        "employees": 7600,
+        "priority": "enterprise",
+        "stage": "opportunity",
+        "need": "robotics telemetry analysis",
+        "activity": "submitted a data-governance questionnaire",
+    },
+    {
+        "account_id": "acc_cyberdyne",
+        "name": "Cyberdyne Systems",
+        "industry": "autonomous systems",
+        "employees": 1400,
+        "priority": "strategic",
+        "stage": "discovery",
+        "need": "safety-evaluation reporting",
+        "activity": "requested an evaluation-framework demo",
     },
 ]
+
+
+def build_docs() -> list[dict]:
+    docs: list[dict] = []
+    for account in ACCOUNTS:
+        slug = account["account_id"].removeprefix("acc_")
+        docs.extend(
+            [
+                {
+                    "doc_id": f"doc-{slug}-profile",
+                    "account_id": account["account_id"],
+                    "title": f"{account['name']} account profile",
+                    "body": (
+                        f"{account['name']} is a {account['industry']} company with "
+                        f"{account['employees']} employees. The account priority is "
+                        f"{account['priority']} and the lifecycle stage is {account['stage']}."
+                    ),
+                    "source": "crm_enrichment",
+                },
+                {
+                    "doc_id": f"doc-{slug}-activity",
+                    "account_id": account["account_id"],
+                    "title": f"{account['name']} activity and needs",
+                    "body": (
+                        f"{account['name']} needs {account['need']} and recently "
+                        f"{account['activity']}. This note is approved for customer follow-up."
+                    ),
+                    "source": "product_events",
+                },
+            ]
+        )
+    return docs
+
+
+DOCS = build_docs()
 
 
 def main() -> None:

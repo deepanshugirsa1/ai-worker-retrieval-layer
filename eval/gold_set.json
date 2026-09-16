@@ -1,17 +1,102 @@
 [
   {
-    "query": "What is Acme and are they interested in AI SDR outreach?",
     "expected_account_id": "acc_acme",
-    "expect_grounded": true
+    "queries": [
+      "What industry is Acme in and how many employees does it have?",
+      "What is Acme's account priority and lifecycle stage?",
+      "What does Acme need from an AI SDR?",
+      "Which account opened the pricing page twice this week?",
+      "Summarize Acme's profile, recent activity, and customer need."
+    ]
   },
   {
-    "query": "Tell me about Globex firmographics and priority.",
     "expected_account_id": "acc_globex",
-    "expect_grounded": true
+    "queries": [
+      "What industry is Globex in and how many employees does it have?",
+      "What is Globex's account priority and lifecycle stage?",
+      "Which account needs supply-chain forecasting?",
+      "Who requested a security review?",
+      "Summarize Globex's profile, recent activity, and customer need."
+    ]
   },
   {
-    "query": "What deal stage is Initech in and what do they need?",
     "expected_account_id": "acc_initech",
-    "expect_grounded": true
+    "queries": [
+      "What industry is Initech in and how many employees does it have?",
+      "What is Initech's account priority and lifecycle stage?",
+      "Which account needs retrieval-backed AI worker follow-up?",
+      "Who completed a technical discovery call?",
+      "Summarize Initech's profile, recent activity, and customer need."
+    ]
+  },
+  {
+    "expected_account_id": "acc_umbrella",
+    "queries": [
+      "What industry is Umbrella in and how many employees does it have?",
+      "What is Umbrella's account priority and lifecycle stage?",
+      "Which account needs governed research-document search?",
+      "Who downloaded the compliance whitepaper?",
+      "Summarize Umbrella's profile, recent activity, and customer need."
+    ]
+  },
+  {
+    "expected_account_id": "acc_hooli",
+    "queries": [
+      "What industry is Hooli in and how many employees does it have?",
+      "What is Hooli's account priority and lifecycle stage?",
+      "Which account needs customer-support summarization?",
+      "Who ran a product pilot with twenty users?",
+      "Summarize Hooli's profile, recent activity, and customer need."
+    ]
+  },
+  {
+    "expected_account_id": "acc_stark",
+    "queries": [
+      "What industry is Stark Industries in and how many employees does it have?",
+      "What is Stark Industries' account priority and lifecycle stage?",
+      "Which account needs engineering knowledge retrieval?",
+      "Who requested architecture documentation?",
+      "Summarize Stark Industries' profile, recent activity, and customer need."
+    ]
+  },
+  {
+    "expected_account_id": "acc_wayne",
+    "queries": [
+      "What industry is Wayne Enterprises in and how many employees does it have?",
+      "What is Wayne Enterprises' account priority and lifecycle stage?",
+      "Which account needs risk-analysis automation?",
+      "Who scheduled an executive workshop?",
+      "Summarize Wayne Enterprises' profile, recent activity, and customer need."
+    ]
+  },
+  {
+    "expected_account_id": "acc_wonka",
+    "queries": [
+      "What industry is Wonka Industries in and how many employees does it have?",
+      "What is Wonka Industries' account priority and lifecycle stage?",
+      "Which account needs quality-incident classification?",
+      "Who viewed the API documentation?",
+      "Summarize Wonka Industries' profile, recent activity, and customer need."
+    ]
+  },
+  {
+    "expected_account_id": "acc_tyrell",
+    "queries": [
+      "What industry is Tyrell Corporation in and how many employees does it have?",
+      "What is Tyrell Corporation's account priority and lifecycle stage?",
+      "Which account needs robotics telemetry analysis?",
+      "Who submitted a data-governance questionnaire?",
+      "Summarize Tyrell Corporation's profile, recent activity, and customer need."
+    ]
+  },
+  {
+    "expected_account_id": "acc_cyberdyne",
+    "queries": [
+      "What industry is Cyberdyne Systems in and how many employees does it have?",
+      "What is Cyberdyne Systems' account priority and lifecycle stage?",
+      "Which account needs safety-evaluation reporting?",
+      "Who requested an evaluation-framework demo?",
+      "Summarize Cyberdyne Systems' profile, recent activity, and customer need."
+    ]
   }
 ]

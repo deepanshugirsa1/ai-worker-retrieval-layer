@@ -4,8 +4,9 @@ Retrieval infrastructure that gives **AI workers** governed access to customer k
 via **MCP servers**, **FastAPI** tool APIs, embeddings, vector search, and RAG grounding checks
 over a ClickHouse-style data lake (DuckDB locally).
 
-> **Status: ~65% complete.** MCP tools, FastAPI, embedding index, retrieval, grounding checks,
-> and demo scripts run locally. Production ClickHouse + hosted embedding model + auth are planned.
+> **Status: evaluation milestone complete.** MCP tools, FastAPI, embedding index, retrieval,
+> grounding checks, a 50-query gold set, regression gates, tests, and demo scripts run locally.
+> Production ClickHouse, hosted embeddings, authentication, and tenant isolation remain planned.
 
 ## What works today vs. planned
 
@@ -18,7 +19,7 @@ over a ClickHouse-style data lake (DuckDB locally).
 | Lexical reranker | Done | Blends vector score with lexical overlap for precision |
 | Query-embedding cache | Done | In-process LRU with hit-rate stats (Redis in prod) |
 | RAG grounding checks | Done | Rejects answers unsupported by retrieved context |
-| Offline eval harness | Done | Gold set with top-1 accuracy + supported-ratio gate |
+| Offline eval harness | Done | 50-query gold set with top-1, recall@3, MRR, grounding metrics, and regression gates |
 | Tests + CI | Done | pytest suite + GitHub Actions |
 | Hosted embedding model | Planned | Swap provider to sentence-transformers / OpenAI |
 | Production ClickHouse vector search | Planned | Or a dedicated vector DB |
@@ -34,6 +35,33 @@ over a ClickHouse-style data lake (DuckDB locally).
 - DuckDB knowledge and retrieval logs for auditable document IDs, scores, and outcomes
 - Grounding checks that reject answers unsupported by retrieved context
 - Docker packaging, local demo data, automated tests, and GitHub Actions CI
+
+## Reproducible evaluation
+
+The versioned benchmark contains **50 unique queries across 10 synthetic customer
+accounts**. It tests retrieval by company, firmographics, lifecycle stage, customer
+need, and recent activity. Run it locally with:
+
+```bash
+python data/seed_knowledge.py
+python -m eval.grounding_eval
+python -m pytest -q
+```
+
+Measured with the deterministic offline hashing embedder and lexical reranker:
+
+| Metric | Result | Regression gate |
+|---|---:|---:|
+| Top-1 account accuracy | **98.0%** | ≥ 90% |
+| Recall@3 | **98.0%** | ≥ 98% |
+| Mean reciprocal rank | **0.982** | ≥ 0.940 |
+| Average supported-token ratio | **85.2%** | ≥ 60% |
+| Grounding-gate pass rate | **100%** | ≥ 95% |
+
+All regression gates pass, and the test suite reports **9 passing tests**. The
+single retrieval miss is preserved in the case-level output rather than hidden.
+These results characterize the bundled synthetic benchmark; they are not claims
+about production traffic or a hosted embedding model.
 
 ## Architecture
 
