@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-from src.embeddings import cosine, embed
+from src.embeddings import cosine
 from src.lake import connect, init_schema
+from src.providers import get_embedding_provider
 
 
 def retrieve(query: str, top_k: int = 5, min_score: float = 0.15, dim: int = 64) -> list[dict]:
     con = connect()
     init_schema(con)
-    q = embed(query, dim=dim)
+    q = get_embedding_provider(dim=dim).embed(query)
     rows = con.execute(
         """
         SELECT d.doc_id, d.account_id, d.title, d.body, d.source, e.vector
