@@ -1,0 +1,11 @@
+embedding:
+  dim: 64
+  method: hashing  # swap for sentence-transformers in production
+retrieval:
+  top_k: 5
+  min_score: 0.15
+grounding:
+  require_citation: true
+  max_unsupported_ratio: 0.25
+lake:
+  path: data/processed/knowledge.duckdb
