@@ -1,0 +1,17 @@
+[
+  {
+    "query": "What is Acme and are they interested in AI SDR outreach?",
+    "expected_account_id": "acc_acme",
+    "expect_grounded": true
+  },
+  {
+    "query": "Tell me about Globex firmographics and priority.",
+    "expected_account_id": "acc_globex",
+    "expect_grounded": true
+  },
+  {
+    "query": "What deal stage is Initech in and what do they need?",
+    "expected_account_id": "acc_initech",
+    "expect_grounded": true
+  }
+]
