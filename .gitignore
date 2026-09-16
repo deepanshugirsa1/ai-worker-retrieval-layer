@@ -11,7 +11,11 @@ build/
 .DS_Store
 .idea/
 .vscode/
+.pytest_cache/
+pytest-cache-files-*/
 data/raw/*.csv
+data/raw/*.jsonl
+data/raw/*.state.json
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
